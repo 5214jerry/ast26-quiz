@@ -33,7 +33,7 @@ if (fs.existsSync(envPath)) {
 const apiKey = process.env.ANTHROPIC_API_KEY;
 if (!apiKey) {
   console.error('ANTHROPIC_API_KEY not set — skipping AI review');
-  const md = '## \uD83E\uDD16 AI 題目審查\n\n> AI 審查不可用 — 未設定 `ANTHROPIC_API_KEY`，請人工審查。\n\n---\n_審查由 Claude (claude-opus-4-0-20250514) 執行。此為建議性質，最終由助教或老師決定是否 merge。_\n';
+  const md = '## \uD83E\uDD16 AI 題目審查\n\n> AI 審查不可用 — 未設定 `ANTHROPIC_API_KEY`，請人工審查。\n\n---\n_審查由 Claude (claude-opus-4-20250514) 執行。此為建議性質，最終由助教或老師決定是否 merge。_\n';
   fs.writeFileSync(path.join(repoRoot, 'claude-review-results.md'), md);
   process.exit(0);
 }
@@ -194,7 +194,7 @@ ${existingSection}
   try {
     const response = await Promise.race([
       client.messages.create({
-        model: 'claude-opus-4-0-20250514',
+        model: 'claude-opus-4-20250514',
         max_tokens: 4096,
         system: systemPrompt,
         messages: [{ role: 'user', content: userPrompt }],
@@ -294,7 +294,7 @@ async function main() {
     mdParts.push('---\n');
   }
 
-  mdParts.push('_審查由 Claude (claude-opus-4-0-20250514) 執行。此為建議性質，最終由助教或老師決定是否 merge。_\n');
+  mdParts.push('_審查由 Claude (claude-opus-4-20250514) 執行。此為建議性質，最終由助教或老師決定是否 merge。_\n');
 
   const markdown = mdParts.join('\n');
   console.log('\n' + markdown);
